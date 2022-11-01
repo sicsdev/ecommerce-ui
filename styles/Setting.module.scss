@@ -1,0 +1,25 @@
+.setting_wrapper{
+    .basic_info{
+        .formstyle{
+            display: flex;
+            justify-content: space-between;
+            .input{
+                display: flex;
+                flex-direction: column;
+                width: 380px;
+            }
+        }
+
+        .conected_applications{
+
+            .items{
+                display: flex;
+                .listitem{
+                    cursor: pointer;
+                    
+                }
+            }
+
+        }
+    }
+}
