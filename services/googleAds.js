@@ -5,6 +5,9 @@ class googleAds {
   async googleAuth() {
     return await axios.get(`${axiosConfig}/google/auth`);
   }
+  async googleReports(){
+    return await axios.get(`${axiosConfig}/google/reports`);
+  }
 }
 
 

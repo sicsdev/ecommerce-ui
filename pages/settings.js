@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import setting_style from "../styles/Setting.module.scss";
 import facebookAdsService from "../services/facebbokAds";
+import googleAdsService from "../services/googleAds";
 import { useRouter } from "next/router";
 
 const Settings = () => {
   const [authCode, setAuthCode] = useState("");
   const { query } = useRouter();
   console.log("gcgyuwe : ", authCode);
+
   const facbookHandler = async () => {
     let facebookRes = await facebookAdsService.facbookAuth();
     let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=0,height=0,left=-1000,top=-1000`;
@@ -14,30 +16,35 @@ const Settings = () => {
     // if (window.focus) {popup.focus()}
   };
 
+  const googleHandler = async () => {
+    let googleRes = await googleAdsService.googleAuth();
+    let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=0,height=0,left=-1000,top=-1000`;
+    let popup = window.open(googleRes.data.data, "", params);
+  };
+
   function refreshParent() {
     window.opener.location.reload();
-}
+  }
 
-  const getFacbookReports = () => {
+  const getReports = () => {
     const { code } = query;
 
     if (code) {
       window.parent.postMessage(code);
       window.close();
-      // refreshParent();
+      refreshParent();
     }
   };
 
   const getFbReports = () => {
-    window.onmessage = (res) =>{
+    window.onmessage = (res) => {
       console.log("rescs : ", res.data);
-    }
-    console.log("code bhehjj vehjbb : ", authCode);
+    };
   };
 
   // window.postMessage
   useEffect(() => {
-    getFacbookReports();
+    getReports();
   }, [query]);
 
   useEffect(() => {
@@ -83,7 +90,7 @@ const Settings = () => {
                     <img src="googleAnalytics.png" />
                     <p
                       className={setting_style.listitem}
-                      onClick={facbookHandler}
+                      onClick={googleHandler}
                     >
                       {" "}
                       Google Analytics{" "}

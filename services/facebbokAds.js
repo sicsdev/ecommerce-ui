@@ -5,6 +5,10 @@ class facebookAds {
   async facbookAuth() {
     return await axios.get(`${axiosConfig}/facebook/auth`);
   }
+
+  async facebookReports(){
+    return await axios.get(`${axiosConfig}/facebook/reports`);
+  }
 }
 
 
